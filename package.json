@@ -18,8 +18,10 @@
   },
   "homepage": "https://github.com/duhaalazzam/book_app#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
+    "path": "^0.12.7",
     "superagent": "^6.1.0"
   }
 }
