@@ -19,7 +19,7 @@ function Book(info) {
   const placeholderImage = 'https://i.imgur.com/J5LVHEL.jpg';
   this.image = info.imageLinks.thumbnail || placeholderImage;
   this.title = info.title || 'No title available';
-  this.authors = info.authors[0] || 'The author not provided';
+  this.authors = info.authors || 'The author not provided';
   this.description = info.description || info.subtitle || 'The description not provided';
 
 }
