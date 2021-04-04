@@ -1,0 +1,59 @@
+body {
+  background-color: rgb(180, 180, 180);
+}
+
+main {
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: rgb(219, 219, 219);
+  height: 100vh;
+}
+
+main div {
+  text-align: center;
+  background-color: lightgrey;
+  margin-top: 8vh;
+  margin-bottom: 10vh;
+  padding: 3vh 8vw;
+  border: outset 4px rgb(160, 160, 160);
+}
+
+main div img {
+  width: 270px;
+  height: 370px;
+  margin: 3vh auto;
+}
+
+form {
+  margin: 0 auto;
+  margin-top: 5vh;
+  text-align: center;
+}
+
+#search {
+  width: 75%;
+  height: 50px;
+  border: solid gray 1px;
+  border-radius: 3px;
+}
+
+.checkbox {
+  margin: 3vh auto;
+  width: 75%;
+  height: 50px;
+  border-radius: 3px;
+  background-color: rgb(110, 110, 110);
+}
+
+form button {
+  width: 75%;
+  height: 50px;
+  background-color: black;
+  border-radius: 3px;
+  color: white;
+}
+
+#imgDiv{
+  text-align: center;
+}
