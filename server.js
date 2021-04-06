@@ -4,17 +4,21 @@ const dotenv = require("dotenv").config();
 const express = require("express");
 const superagent = require("superagent");
 const pg = require("pg");
+var methodOverride = require('method-override')
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 const DATABASE_URL = process.env.DATABASE_URL;
 
-const client = new pg.Client({
-    connectionString: DATABASE_URL,
-    ssl: {
-        rejectUnauthorized: false
-    }
-});
+const client = new pg.Client(DATABASE_URL);
+// const client = new pg.Client({
+//     connectionString: DATABASE_URL,
+//     ssl: {
+//         rejectUnauthorized: false
+//     }
+// });
+
+app.use(methodOverride('Method-Override'))
 app.use(express.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 
@@ -43,6 +47,39 @@ app.get("/", (req, res) => {
                 NumberOfBooks: selectResult.rows.length,
                 results: selectResult.rows,
             });
+        })
+        .catch((error) => {
+            handleError(req, res, error);
+        });
+});
+
+app.post("/update/:id", (req, res) => {
+    const bookId = req.params.id;
+    const selectQ = "SELECT * FROM books WHERE id=$1";
+    const safeValues = [bookId];
+    client
+        .query(selectQ, safeValues)
+        .then((results) => {
+            res.render("pages/books/update", { book: results.rows[0] });
+        })
+        .catch((error) => {
+            handleError(req, res, error);
+        });
+
+});
+
+
+app.put('/books/update/:id', (req, res) => {
+    const bookId = req.params.id;
+    const { image, title, authors, description, ISBN, bookshelf } = req.body;
+    //console.log(image);
+    const insertQ =
+        "UPDATE books SET image=$1, title=$2, authors=$3, description=$4, ISBN=$5, bookshelf=$6 WHERE id=$7;";
+    const safeValues = [image, title, authors, description, ISBN, bookshelf, bookId];
+    client
+        .query(insertQ, safeValues)
+        .then((results) => {
+            res.redirect(`/books/${bookId}`);
         })
         .catch((error) => {
             handleError(req, res, error);
@@ -113,6 +150,18 @@ app.post("/books", (req, res) => {
             handleError(req, res, error);
         });
 });
+
+app.delete("/books/delete/:id", (req, res) => {
+
+    const bookId = req.params.id;
+    const safeValues = [bookId];
+    const deleteQuery = 'DELETE FROM books WHERE id=$1';
+
+    client.query(deleteQuery, safeValues).then(() => {
+        res.redirect('/');
+    }).catch(error => handleError(req, res, error));
+});
+
 
 function handleError(req, res, error) {
     res.status(500).render("pages/error", {
