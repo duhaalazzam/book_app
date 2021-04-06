@@ -19,7 +19,7 @@
                     <%= book.title%>
                 </h2>
                 <p class="author">
-                    <%=book.author%>
+                    <%=book.authors%>
                 </p>
                 <p>
                     <%=book.description%>
@@ -30,6 +30,14 @@
                 <p>Bookshelf :
                     <%=book.bookshelf%>
                 </p>
+                <form action="/update/<%= book.id%>" method="post">
+                    <button type="submit">Update Book</button>
+                </form>
+                <form id="delete" action="/books/delete/<%=book.id%>?Method-Override=DELETE" method="POST">
+                    <input type="hidden" value="<%= book.id%>">
+                    <button type="submit">Delete Book</button>
+                </form>
+
             </div>
             <% }) %>
     </main>

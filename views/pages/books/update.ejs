@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <%- include('../layout/head.ejs') %>
+        <title>Update Book</title>
+</head>
+
+<body>
+    <main>
+        <form id="update" action="/books/update/<%=book.id%>?Method-Override=PUT" method="POST">
+            <fieldset>
+                <legend>Update book</legend>
+                Book Title :
+                <input type="text" name="title" value="<%= book.title %>">
+                <br /> Book Author :
+                <input type="text" name="searchBy" value="<%= book.authors %>">
+                <br /> Book ISBN :
+                <input type="text" name="isbn" value="<%= book.isbn %>">
+                <br /> Book image
+                <input type="text" name="image" value="<%= book.image %>">
+                <br /> Book description :<br />
+                <textarea cols="30" rows="10" name="description">
+                <%= book.description %>
+          </textarea>
+                <br /> Bookshelf :
+                <input type="text" name="bookshelf" value="<%= book.bookshelf %>">
+                <br />
+                <button type="submit" value="updateBook">Update Book</button>
+            </fieldset>
+        </form>
+
+    </main>
+</body>
+
+</html>

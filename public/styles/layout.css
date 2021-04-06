@@ -7,7 +7,7 @@ main {
     margin-left: auto;
     margin-right: auto;
     background-color: rgb(219, 219, 219);
-    height: 100vh;
+    height: 150vh;
 }
 
 main div {
@@ -71,4 +71,41 @@ form button {
 
 #imgDiv {
     text-align: center;
+}
+
+#update {
+    position: relative;
+    top: 10vh;
+    color: darkslategray;
+    font-size: large;
+}
+
+#update legend {
+    color: brown;
+    font-size: 75px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+    margin-bottom: 4vh;
+}
+
+#update input {
+    text-align: left;
+    margin-bottom: 5vh;
+    width: 50%;
+    height: 50px;
+    border-radius: 10px;
+}
+
+#update button {
+    width: 75%;
+    height: 50px;
+    background-color: black;
+    border-radius: 3px;
+    color: white;
+}
+
+textarea {
+    text-align: center;
+    margin-bottom: 5vh;
+    border-radius: 10px;
 }
