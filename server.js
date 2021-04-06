@@ -10,7 +10,6 @@ const PORT = process.env.PORT || 5000;
 const DATABASE_URL = process.env.DATABASE_URL;
 
 const client = new pg.Client(DATABASE_URL);
-console.log(client.connectionParameters.database);
 app.use(express.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 
@@ -25,7 +24,7 @@ function Book(info) {
     this.title = info.volumeInfo.title || "No title available";
     this.authors = info.volumeInfo.authors || "The author not provided";
     this.description = info.volumeInfo.description || info.subtitle || "The description not provided";
-    this.ispn = info.id;
+    this.ispn = info.volumeInfo.industryIdentifiers ? info.volumeInfo.industryIdentifiers.identifier : 'No ISBN founded';
     this.bookshelf = info.volumeInfo.categories ? info.volumeInfo.categories[0] : "None";
 }
 
@@ -41,7 +40,7 @@ app.get("/", (req, res) => {
             });
         })
         .catch((error) => {
-            res.render("pages/error", { error: error });
+            handleError(req, res, error);
         });
 });
 
@@ -75,13 +74,13 @@ function createSearch(req, res) {
             res.render("pages/show", { searchResults: results });
         })
         .catch((error) => {
-            res.render("pages/error", { error: error });
+            handleError(req, res, error);
         });
 }
 
 app.get("/books/:id", (req, res) => {
     const bookId = req.params.id;
-    console.log(bookId);
+    //console.log(bookId);
     const selectQ = "SELECT * FROM books WHERE id=$1";
     const safeValues = [bookId];
     client
@@ -90,33 +89,32 @@ app.get("/books/:id", (req, res) => {
             res.render("pages/books/detail", { results: results.rows });
         })
         .catch((error) => {
-            res.status(500).render("pages/error", {
-                error: error,
-                massage: "Oops..!Something went wrong",
-            });
+            handleError(req, res, error);
         });
 });
 
 app.post("/books", (req, res) => {
-    const image = req.body.image;
-    // const { image, title, authors, description, ISBN, bookshelf } = req.body;
-    console.log(image);
-    // console.log(title);
+    const { image, title, authors, description, ISBN, bookshelf } = req.body;
+    //console.log(image);
     const insertQ =
-        "INSERT INTO books (image, title, authors, description, ISBN,bookshelf) VALUES($1,$2,$3,$4,$5,$6);";
+        "INSERT INTO books (image, title, authors, description, ISBN, bookshelf) VALUES($1,$2,$3,$4,$5,$6) returning id;";
     const safeValues = [image, title, authors, description, ISBN, bookshelf];
     client
         .query(insertQ, safeValues)
-        .then(() => {
-            res.redirect("/");
+        .then((results) => {
+            res.redirect(`/books/${results.rows[0].id}`);
         })
         .catch((error) => {
-            res.status(500).render("pages/error", {
-                error: error,
-                massage: "Oops..!Something went wrong",
-            });
+            handleError(req, res, error);
         });
 });
+
+function handleError(req, res, error) {
+    res.status(500).render("pages/error", {
+        error: error,
+        massage: "Oops..!Something went wrong",
+    });
+}
 
 client.connect().then(() => {
     app.listen(PORT, () => {

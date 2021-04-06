@@ -2,42 +2,34 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles/reset.css">
-  <link rel="stylesheet" href="styles/base.css">
-  <link rel="stylesheet" href="styles/layout.css">
-  <link rel="stylesheet" href="styles/modules.css">
-  <title>Book shop</title>
+    <%- include('./layout/head.ejs') %>
+        <title>Book shop</title>
 </head>
 
 <body>
-  <h1 id="indexh1">Welcome to you in our Book-app</h1>
-  <form action="/searches/new" method="get">
-    <button id="indexa" type="submit">Go to Search page</button>
-  </form>
+    <h1 id="indexh1">Welcome to you in our Book-app</h1>
+    <form action="/searches/new" method="get">
+        <button id="indexa" type="submit">Go to Search page</button>
+    </form>
 
-  <main>
-    <h1 id ="best">Best Books !</h1>
-    <h4><span><%= NumberOfBooks%></span>Saved Books</h4>
+    <main>
+        <h1 id="best">Best Books !</h1>
+        <h4><span><%= NumberOfBooks%></span>Saved Books</h4>
 
-    <% results.forEach(book=> {%>
-      <div>
-        <img src="<%= book.image %>" alt="">
-        <p id="title">
-          <%= book.title %>
-        </p>
-        <p id="author">
-          <%= book.authors %>
-        </p>
-        <form action="/books/<%= book.id %>" method="get">
-          <button type="submit">View Details</button>
-        </form>
-      </div>
-      <% }); %>
-  </main>
-  
+        <% results.forEach(book=> {%>
+            <div>
+                <img src="<%= book.image %>" alt="">
+                <p class="title">
+                    <%= book.title %>
+                </p>
+                <p class="author">
+                    <%= book.authors %>
+                </p>
+                <a id="link" href='/books/<%= book.id %>' target="_blank" rel="noopener noreferrer">View details</a>
+            </div>
+            <% }); %>
+    </main>
+
 </body>
 
 </html>
