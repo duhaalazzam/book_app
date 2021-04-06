@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../layout/head.ejs') %>
+</head>
+
+<body>
+    <h1 id="best">Best Books !</h1>
+    <h4>Book Details</h4>
+    <form action="/" method="get">
+        <button id="indexa" type="submit">Go to the main page</button>
+    </form>
+    <main>
+        <% results.forEach(book=> {%>
+            <div id="detail">
+                <img src=" <%=book.image %>" alt="" />
+                <h2 class="title">
+                    <%= book.title%>
+                </h2>
+                <p class="author">
+                    <%=book.author%>
+                </p>
+                <p>
+                    <%=book.description%>
+                </p>
+                <p>ISBN :
+                    <%=book.isbn%>
+                </p>
+                <p>Bookshelf :
+                    <%=book.bookshelf%>
+                </p>
+            </div>
+            <% }) %>
+    </main>
+</body>
+
+</html>

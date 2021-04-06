@@ -1,69 +1,97 @@
 @import url('https://fonts.googleapis.com/css2?family=Fredericka+the+Great&family=Glegoo&family=Roboto+Mono&family=Source+Code+Pro:ital,wght@1,300&display=swap');
-#title {
-  font-family: 'Fredericka the Great', cursive;
-  font-size: xx-large;
-  margin: 3vh auto;
+.title {
+    font-family: 'Fredericka the Great', cursive;
+    font-size: xx-large;
+    margin: 3vh auto;
 }
 
-#author {
-  font-style: italic;
-  margin: 3vh auto;
+.author {
+    font-style: italic;
+    margin: 3vh auto;
+}
+
+p {
+    font-size: large;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 h4 {
-  font-size: xx-large;
-  text-align: center;
-  background-color: rgba(73, 73, 73, 0.521);
-  color: white;
-  height: 7vh;
-  padding-top: 1vh;
+    font-size: xx-large;
+    text-align: center;
+    background-color: rgba(73, 73, 73, 0.521);
+    color: white;
+    height: 7vh;
+    padding-top: 1vh;
 }
 
 h1 {
-  font-size: xx-large;
-  background-color: black;
-  color: white;
-  height: 10vh;
-  padding-top: 2vh;
+    font-size: xx-large;
+    background-color: black;
+    color: white;
+    height: 10vh;
+    padding-top: 2vh;
 }
+
 
 /*error*/
 
 #error {
-  text-align: center;
-  font-family: 'Source Code Pro', monospace;
-  margin-top: 20vh;
+    text-align: center;
+    font-family: 'Source Code Pro', monospace;
+    margin-top: 20vh;
 }
 
 #error h1 {
-  font-size: xx-large;
-  display: inline-block;
-  background-color: rgb(180, 180, 180);
-  font-weight: 1000;
-
+    font-size: xx-large;
+    display: inline-block;
+    background-color: rgb(180, 180, 180);
+    font-weight: 1000;
 }
 
 #error p {
-  font-size: large;
-  font-weight: bold;
-  display: inline-block;
+    font-size: large;
+    font-weight: bold;
+    display: inline-block;
 }
+
+
 /*index*/
 
 #indexh1 {
-  font-size: 40px;
-  font-weight: bold;
-  background-color: gray;
-  text-align: center;
+    font-size: 40px;
+    font-weight: bold;
+    background-color: gray;
+    text-align: center;
 }
 
 #indexa {
-  font-size: 24px;
-  text-decoration: none;
-  margin: 30px;
-  color: white;
-  background-color: black;
-  width: 30%;
-  height: 40px;
-  margin-left: 90px;
+    font-size: 24px;
+    text-decoration: none;
+    margin: 30px;
+    color: white;
+    background-color: black;
+    width: 30%;
+    height: 40px;
+    margin-left: 90px;
+}
+
+h4 span {
+    display: inline-block;
+    background-color: rgb(255, 142, 142);
+    color: whitesmoke;
+    width: 25px;
+    border-radius: 100px;
+    font-size: 30px;
+    margin-right: 20px;
+}
+
+#link {
+    text-decoration: none;
+    font-size: xx-large;
+    color: rgb(143, 143, 253);
+    font-weight: bold;
+}
+
+#link:hover {
+    color: aliceblue;
 }
