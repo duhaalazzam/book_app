@@ -9,7 +9,12 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const DATABASE_URL = process.env.DATABASE_URL;
 
-const client = new pg.Client(DATABASE_URL);
+const client = new pg.Client({
+    connectionString: DATABASE_URL,
+    ssl: {
+        rejectUnauthorized: false
+    }
+});
 app.use(express.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 
